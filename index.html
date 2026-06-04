@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+</head>
+<body>
+    <div id="mainWrapper">
+        <h1>Air Mouse</h1>
+        
+        <div id="buttonContainer">
+            <button id="connectBtn">Connect to TV</button>
+            <button id="startBtn">Start the cursor</button>
+        </div>
+        
+        <p id="statusText" style="margin-top: 20px; font-weight: bold;"></p>
+    </div>
+
+    <script>
+        const peer = new Peer();
+        let conn;
+
+        // Connect Logic
+        document.getElementById('connectBtn').addEventListener('click', () => {
+            const targetId = prompt("Enter the TV ID:");
+            if (targetId) {
+                conn = peer.connect(targetId);
+                conn.on('open', () => {
+                    document.getElementById('statusText').innerText = "Connected to TV!";
+                });
+            }
+        });
+
+        // Motion Logic
+        document.getElementById('startBtn').addEventListener('click', () => {
+    alert("Click OK to allow motion tracking."); // This forces a user interaction
+    
+    if (typeof DeviceMotionEvent.requestPermission === 'function') {
+        DeviceMotionEvent.requestPermission()
+            .then(permissionState => {
+                if (permissionState === 'granted') {
+                    startTracking();
+                } else {
+                    alert("Permission denied by browser.");
+                }
+            })
+            .catch(console.error);
+    } else {
+        // Fallback for Android/Older browsers
+        startTracking();
+    }
+});
+
+
+        function startTracking() {
+            document.getElementById('statusText').innerText = "Tracking Motion...";
+            window.addEventListener('devicemotion', (event) => {
+                let x = event.accelerationIncludingGravity.x * 20;
+                let y = event.accelerationIncludingGravity.y * 20;
+
+                if (conn && conn.open) {
+                    conn.send({x: x, y: y});
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+
