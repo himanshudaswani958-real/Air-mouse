@@ -1,1 +1,95 @@
+/* Background and General Setup */
+body {
+    background-color: white;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
 
+/* App Title - Centered at the top */
+h1 {
+    color: black;
+    margin-bottom: 50px; /* Space between title and buttons */
+    font-size: 3rem;
+    text-align: center;
+}
+
+/* Container to hold buttons side-by-side */
+#buttonContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 20px; /* Space between Connect and Start buttons */
+}
+
+/* Button Styling */
+button {
+    width: 150px; /* Adjust size to fit side-by-side */
+    padding: 15px;
+    font-size: 1.2rem;
+    color: white;
+    font-weight: bold;
+    border: 2px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Connect Button (Blue) */
+#connectBtn {
+    background-color: blue;
+}
+
+/* Start Button (Green) */
+#startBtn {
+    background-color: green;
+}
+
+/* Camera feed hidden until activated */
+#cameraFeed {
+    display: none;
+    width: 300px;
+    height: 200px;
+    margin-top: 30px;
+    border: 2px solid black;
+}
+body {
+    background-color: white !important;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex; /* Centers everything */
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#mainWrapper {
+    display: flex;
+    flex-direction: column; /* This keeps them in a vertical stack */
+    align-items: center;    /* This keeps them centered horizontally */
+    gap: 20px;              /* This adds space between items automatically */
+    width: 100%;
+}
+
+h1 {
+    color: black;
+    font-size: 3rem;
+    margin: 0; /* Removed margin-bottom so gap handles spacing */
+}
+
+#buttonContainer {
+    display: flex;
+    gap: 20px;
+}
+
+#displayId {
+    font-size: 2rem;
+    color: black;
+    font-weight: bold;
+    margin: 0; /* No extra margin to break the layout */
+}
+
+/* Keep your existing button and cursor styles below... */
